@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обмен валют</title>
+</head>
+<body class="body">
+   <table class="table" cellpadding = "10">
+       <tr>
+           <td>Введите сумму:</td>
+           <td></td>
+           <td><strong>KZT(tenge)</strong></td>
+           <td><strong>USD(dollar)</strong></td>
+           <td><strong>EUR(euro)</strong></td>
+       </tr>
+       <tr>
+           <td>
+               <input type="" id="sum" onchange="check()">
+           </td>
+           <td>
+               <select id="conversion" onchange="check()">
+                   <option  value="KZT">KZT</option>
+                   <option value="USD">DOLLAR</option>
+                   <option value="EUR">EURO</option>
+               </select>
+           </td>
+           <td>
+               <input readonly value="" id="kzt">
+           </td>
+           <td>
+                <input readonly id="usd">
+           </td>
+           <td>
+                <input readonly id="eur">
+           </td>
+       </tr>
+   </table>
+</body>
+<script>
+    function check() {
+
+        let sum = document.getElementById("sum").value;
+        let x = document.getElementById("conversion").value;
+
+        let dollar = 429;
+        let euro = 507;
+        let sellDollar = 431;
+        let sellEuro = 509;
+        let resultDollar;
+        let resultEuro;
+        let resultTenge;
+
+        if (x=="KZT"){
+            resultDollar = parseInt(sum/sellDollar);
+            resultEuro = parseInt(sum/sellEuro);
+            document.getElementById("usd").value = resultDollar;
+            document.getElementById("eur").value = resultEuro;
+            document.getElementById("kzt").value = "-";
+        } else if (x=="USD"){
+            resultTenge = parseInt(sum*dollar);
+            resultEuro = parseInt(resultTenge/sellEuro);
+            document.getElementById("usd").value = "-";
+            document.getElementById("eur").value = resultEuro;
+            document.getElementById("kzt").value = resultTenge;
+        } else {
+            resultTenge = parseInt(sum*euro);
+            resultDollar = parseInt(resultTenge/sellDollar);
+            document.getElementById("usd").value = resultDollar;
+            document.getElementById("eur").value = "-";
+            document.getElementById("kzt").value = resultTenge;
+        }
+
+
+
+    }
+
+
+</script>
+</html>
